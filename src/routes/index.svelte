@@ -1,6 +1,5 @@
 <script>
 	import { create } from 'ipfs-http-client';
-	import AudioPlayer, { stopAll } from './AudioPlayer.svelte';
 
 	/* Instance of the client */
 	//const clientUrl = 'https://ipfs.infura.io:5001/api/v0';
