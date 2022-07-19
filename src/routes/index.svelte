@@ -9,33 +9,47 @@
 	$: file = '';
 	$: submitedForm = false;
 	$: fileUrl = '';
+	$: files = undefined;
 	$: src = '';
+	$: filePath = '';
 
 	const onFormSubmit = async (e) => {
 		e.preventDefault();
 		console.log('submitting form...');
-		console.log(artist);
-		console.log(file);
 		submitedForm = true;
-
-		// var audio = new Audio(file);
-		// audio.play();
-
-		// var files = e.target.files;
-		// src = URL.createObjectURL(files[0]);
+		file = files != undefined ? files[0] : '';
+		//src = files != undefined ? URL.createObjectURL(files[0]) : '';
 
 		try {
 			const added = await client.add(file);
-			fileUrl = `https://ipfs.infura.io/ipfs/${added.path}`;
+			filePath = added.path;
+			fileUrl = `https://ipfs.infura.io/ipfs/${filePath}`;
 			console.log(added);
 			console.log(fileUrl);
 		} catch (error) {
 			console.log('Error uploading file: ', error);
 		}
-		// let files = e.target.files;
-		// console.log(e.target.files);
-		// console.log(files);
-		// src = URL.createObjectURL(files[0]);
+		loadMusic();
+	};
+
+	const loadMusic = async () => {
+		console.log(fileUrl);
+		const a = await fetch('https://httpbin.org/post', {
+			method: 'POST'
+		})
+			.then((res) => {
+				var reader = res.body?.getReader();
+				return reader?.read().then((result) => {
+					return result;
+				});
+			})
+			.then((data) => {
+				var blob = new Blob([data?.value != undefined ? data.value : ''], { type: 'audio/wav' });
+				console.log(blob);
+				var blobUrl = URL.createObjectURL(blob);S
+				console.log(blobUrl);
+				src = blobUrl;
+			});
 	};
 </script>
 
@@ -66,19 +80,8 @@
 									<!-- File Upload -->
 									<div class="form-outline mb-4">
 										<label for="formFile" class="form-label">Input Music File</label>
-										<input
-											bind:value={file}
-											class="form-control"
-											type="file"
-											id="formFile"
-											required
-										/>
+										<input bind:files class="form-control" type="file" id="formFile" required />
 									</div>
-									<!-- {#if loadedFile}
-										<audio id="audio" controls>
-											<source {src} id="src" />
-										</audio>
-									{/if} -->
 
 									<!-- Submit button -->
 									<div class="bottomButton">
@@ -88,15 +91,11 @@
 									</div>
 								</form>
 							{:else}
-								<!-- <button on:click={stopAll}> Stop all! </button> -->
+								<h4>Listen to your Song</h4>
 
-								<!-- {#each audioTracks as src}
-									<AudioPlayer {src} />
-								{/each}  -->
-
-								<!-- <audio id="audio" controls>
-                                    <source src={src} id="src" />
-                                </audio> -->
+								<audio id="audio" controls>
+									<source {src} id="src" />
+								</audio>
 							{/if}
 						</div>
 					</div>

@@ -25,6 +25,8 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0-next.69",
-		"ipfs-http-client": "^57.0.3"
+		"howler": "^2.2.3",
+		"ipfs-http-client": "^57.0.3",
+		"mplayer": "^2.1.0"
 	}
 }
