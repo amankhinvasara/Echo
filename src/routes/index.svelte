@@ -29,24 +29,27 @@
 		} catch (error) {
 			console.log('Error uploading file: ', error);
 		}
+		
 		loadMusic();
 	};
 
 	const loadMusic = async () => {
 		console.log(fileUrl);
-		const a = await fetch('https://httpbin.org/post', {
+		const a = await fetch(`http://ipfs.infura.io:5001/api/v0/dag/get?arg=${filePath}`, {
 			method: 'POST'
 		})
 			.then((res) => {
+				console.log('response: ', res);
+
 				var reader = res.body?.getReader();
 				return reader?.read().then((result) => {
 					return result;
 				});
 			})
 			.then((data) => {
-				var blob = new Blob([data?.value != undefined ? data.value : ''], { type: 'audio/wav' });
+				var blob = new Blob([new Uint8Array(data?.value != undefined ? data.value : [])], { type: 'audio/mp3' });
 				console.log(blob);
-				var blobUrl = URL.createObjectURL(blob);S
+				var blobUrl = URL.createObjectURL(blob);
 				console.log(blobUrl);
 				src = blobUrl;
 			});
