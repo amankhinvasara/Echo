@@ -16,20 +16,19 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
- module.exports = {
+module.exports = {
   defaultNetwork: "hardhat",
   paths: {
-    artifacts: './src/artifacts',
+    artifacts: "./src/artifacts",
   },
   networks: {
     hardhat: {
-      chainId: 1337
+      chainId: 1337,
     },
-    ropsten: {
-      url: process.env.ROPSTEN_NODE_URL,
-      accounts: [process.env.ACCOUNTS],
-    }
+    // ropsten: {
+    //   url: process.env.ROPSTEN_NODE_URL,
+    //   accounts: [process.env.ACCOUNTS],
+    // }
   },
   solidity: "0.8.4",
 };
-
