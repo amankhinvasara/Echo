@@ -1,9 +1,9 @@
 <script>
-	import { create } from 'ipfs-http-client';
+	//import { create } from '../node_modules/.ipfs-http-client';
 
 	/* Instance of the client */
 	//const clientUrl = 'https://ipfs.infura.io:5001/api/v0';
-	const client = create('https://ipfs.infura.io:5001/api/v0');
+	//const client = create('https://ipfs.infura.io:5001/api/v0');
 
 	$: artist = '';
 	$: file = '';
@@ -21,7 +21,7 @@
 		//src = files != undefined ? URL.createObjectURL(files[0]) : '';
 
 		try {
-			const added = await client.add(file);
+			const added = "" //await client.add(file);
 			filePath = added.path;
 			fileUrl = `https://ipfs.infura.io/ipfs/${filePath}`;
 			console.log(added);

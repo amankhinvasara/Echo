@@ -1,24 +1,12 @@
-# Echo
+# Wave-Portal Complete
 
-## Developing
+This is the reference code folder for the article to follow along.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## To run it locally
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```shell
+git clone https://github.com/Nazeeh21/wave-portal-svelte.git
+cd wave-portal-svelte/code/wave-portal-complete
+yarn
+yarn dev
 ```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
